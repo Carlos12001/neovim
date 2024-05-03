@@ -4,14 +4,18 @@ return {
 
   -- Add your own plugin here
 
-  -- Color scheme: tokyonight
+  -- Color scheme: Tokyonight
    {
     "folke/tokyonight.nvim",
-    priority = 1000,
     lazy = true,
-    opts = { style = "moon" },
+    priority = 1000,
   },
-
+  -- Color scheme: Nord Theme
+  {
+    "shaunsingh/nord.nvim",
+    lazy = true,
+    priority = 1000,
+  },
   -- Markdown Preview
   {
     "iamcco/markdown-preview.nvim",
@@ -24,6 +28,7 @@ return {
     build = function() vim.fn["mkdp#util#install"]() end,
   },
 
+
   -- Neo Tree
   {
     "nvim-neo-tree/neo-tree.nvim",
@@ -33,7 +38,14 @@ return {
       "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
       "MunifTanjim/nui.nvim",
       -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
-    }
+    },
+    config = function()
+      require("neo-tree").setup({
+        close_if_last_window = false, -- Don't close NeoTree if it's the last window
+        persist = true, -- Enable persistence across sessions and tabs
+        -- other configurations...
+      })
+    end,
   },
 
   -- Telescope
@@ -41,6 +53,33 @@ return {
     'nvim-telescope/telescope.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function() require("configs.telescope")() end,
+  },
+
+  -- Mason
+  {
+  "williamboman/mason.nvim",
+  build = ":MasonUpdate", -- Updates Mason packages on installation
+  config = function()
+    require("mason").setup()
+  end,
+  },
+  
+  -- Nvim Treesitter
+  {
+  "nvim-treesitter/nvim-treesitter",
+  dependencies = {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+  },
+  build = ":TSUpdate",
+  event = "BufReadPost",
+  config = function()
+    require("nvim-treesitter.configs").setup({
+      ensure_installed = "all", -- Installs all available parsers
+      highlight = { enable = true }, -- Enables syntax highlighting using Treesitter
+      indent = { enable = true }, -- Enables indentation based on Treesitter
+      -- Other configuration options
+    })
+  end,
   },
 
 
