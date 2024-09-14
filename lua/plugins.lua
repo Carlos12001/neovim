@@ -56,31 +56,25 @@ return {
   },
 
   -- Mason
-  {
-  "williamboman/mason.nvim",
-  build = ":MasonUpdate", -- Updates Mason packages on installation
-  config = function()
-    require("mason").setup()
-  end,
-  },
+  -- {
+  -- "williamboman/mason.nvim",
+  -- build = ":MasonUpdate", -- Updates Mason packages on installation
+  -- config = function()
+  --   require("mason").setup()
+  -- end,
+  -- },
   
   -- Nvim Treesitter
-  {
-  "nvim-treesitter/nvim-treesitter",
-  dependencies = {
-    "nvim-treesitter/nvim-treesitter-textobjects",
-  },
-  build = ":TSUpdate",
-  event = "BufReadPost",
-  config = function()
-    require("nvim-treesitter.configs").setup({
-      ensure_installed = "all", -- Installs all available parsers
-      highlight = { enable = true }, -- Enables syntax highlighting using Treesitter
-      indent = { enable = true }, -- Enables indentation based on Treesitter
-      -- Other configuration options
-    })
-  end,
-  },
+  -- {
+  --   "nvim-treesitter/nvim-treesitter",
+  --   dependencies = {
+  --     "nvim-treesitter/nvim-treesitter-textobjects",
+  --   },
+  --   build = ":TSUpdate",
+  --   config = function()
+  --     require("configs.nvim-treesitter").setup()
+  --   end,
+  -- },
 
 
   -- Config for Lazy
